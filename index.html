@@ -13,13 +13,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- SheetJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <!-- Math.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.0.0/math.min.js"></script>
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- Custom CSS -->
     <style>
-        /* Estilos CSS */
         body {
             background-color: #f7f9fc;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -52,7 +49,6 @@
         .results-table th {
             background-color: #ecf0f1;
         }
-        /* Añadir estilos adicionales según sea necesario */
         .export-buttons {
             margin-top: 20px;
         }
@@ -82,7 +78,11 @@
             color: white;
             padding: 10px;
             margin-bottom: 10px;
-            border-radius: 5px;
+        }
+        /* Style for annotations */
+        .annotation {
+            font-size: 0.85em;
+            color: #7f8c8d;
         }
         /* Style for surprise design */
         .surprise-design {
@@ -90,40 +90,6 @@
             padding: 15px;
             border-radius: 10px;
             background-color: #eaf2f8;
-        }
-        /* Estilos para tablas compactas */
-        .compact-table {
-            font-size: 0.7em;
-            margin-bottom: 0;
-        }
-        .compact-table th, .compact-table td {
-            padding: 2px 4px;
-            text-align: center;
-        }
-        .compact-table thead {
-            background-color: #34495e;
-            color: white;
-            position: sticky;
-            top: 0;
-        }
-        .compact-table tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .compact-table tbody tr:hover {
-            background-color: #d1e7dd;
-        }
-        /* Estilos para tarjetas compactas */
-        .compact-card {
-            background-color: #ffffff;
-            border: 1px solid #ced4da;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .compact-card .card-title {
-            font-size: 0.85em;
-            margin-bottom: 8px;
-        }
-        .compact-card .table {
-            margin-bottom: 0;
         }
     </style>
 </head>
@@ -398,7 +364,6 @@
     <!-- Resultados de los Cálculos -->
     <div class="surprise-design mb-4">
         <h3 class="section-title">Resultados de los Cálculos</h3>
-        <!-- Tabla de Resultados -->
         <div class="table-responsive">
             <table class="table table-bordered results-table">
                 <thead>
@@ -449,146 +414,11 @@
                         <td id="f_darcy">-</td>
                         <td></td>
                     </tr>
-                    <!-- Reemplazo: Parámetros de operación del pozo -->
-                    <tr>
-                        <td>Parámetros de operación del pozo</td>
-                        <td id="natural_flow_result">-</td>
-                        <td></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
-    </div>
-
-    <!-- Sección de Curvas Dinámicas -->
-    <div class="surprise-design mb-4">
-        <h3 class="section-title">Curvas IPR y VFP</h3>
-        <div class="row">
-            <!-- Tarjeta IPR -->
-            <div class="col-12 col-md-3 mb-3">
-                <div class="card compact-card">
-                    <div class="card-body p-2">
-                        <h5 class="card-title text-center">Curva IPR</h5>
-                        <div class="table-responsive">
-                            <table class="table table-sm table-bordered table-hover compact-table">
-                                <thead>
-                                    <tr>
-                                        <th>Caudal (bbl/día)</th>
-                                        <th>Presión (psi)</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="ipr_data_table">
-                                    <!-- Filas dinámicas de IPR -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Tarjeta VFP 1 -->
-            <div class="col-12 col-md-3 mb-3">
-                <div class="card compact-card">
-                    <div class="card-body p-2">
-                        <h5 class="card-title text-center">Curva VFP - D1</h5>
-                        <div class="table-responsive">
-                            <table class="table table-sm table-bordered table-hover compact-table">
-                                <thead>
-                                    <tr>
-                                        <th>Caudal (bbl/día)</th>
-                                        <th>Presión (psi)</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="vfp1_data_table">
-                                    <!-- Filas dinámicas de VFP1 -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Tarjeta VFP 2 -->
-            <div class="col-12 col-md-3 mb-3">
-                <div class="card compact-card">
-                    <div class="card-body p-2">
-                        <h5 class="card-title text-center">Curva VFP - D2</h5>
-                        <div class="table-responsive">
-                            <table class="table table-sm table-bordered table-hover compact-table">
-                                <thead>
-                                    <tr>
-                                        <th>Caudal (bbl/día)</th>
-                                        <th>Presión (psi)</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="vfp2_data_table">
-                                    <!-- Filas dinámicas de VFP2 -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Tarjeta VFP 3 -->
-            <div class="col-12 col-md-3 mb-3">
-                <div class="card compact-card">
-                    <div class="card-body p-2">
-                        <h5 class="card-title text-center">Curva VFP - D3</h5>
-                        <div class="table-responsive">
-                            <table class="table table-sm table-bordered table-hover compact-table">
-                                <thead>
-                                    <tr>
-                                        <th>Caudal (bbl/día)</th>
-                                        <th>Presión (psi)</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="vfp3_data_table">
-                                    <!-- Filas dinámicas de VFP3 -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sección Oculta: Coeficientes de Ajuste -->
-    <div class="surprise-design mb-4 d-none">
-        <h3 class="section-title">Coeficientes de Ajuste</h3>
-        <!-- Tabla de Coeficientes -->
-        <div class="table-responsive">
-            <table class="table table-bordered results-table">
-                <thead>
-                    <tr>
-                        <th>Curva</th>
-                        <th>Coeficientes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Curva IPR</td>
-                        <td id="coefficients_ipr">-</td>
-                    </tr>
-                    <tr>
-                        <td>Curva VFP D1</td>
-                        <td id="coefficients_vfp1">-</td>
-                    </tr>
-                    <tr>
-                        <td>Curva VFP D2</td>
-                        <td id="coefficients_vfp2">-</td>
-                    </tr>
-                    <tr>
-                        <td>Curva VFP D3</td>
-                        <td id="coefficients_vfp3">-</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Sección Oculta: Intersecciones entre Curvas IPR y VFP -->
-    <div class="surprise-design mb-4 d-none">
-        <h3 class="section-title">Intersecciones entre Curvas IPR y VFP</h3>
-        <div class="table-responsive">
+        <!-- Tabla de Intersecciones -->
+        <div class="table-responsive mt-3">
             <table class="table table-bordered results-table">
                 <thead>
                     <tr>
@@ -602,58 +432,65 @@
                 </tbody>
             </table>
         </div>
+        <!-- Resultado del Flujo Natural -->
+        <div id="natural_flow_result" class="mt-3">
+            <!-- El resultado se mostrará aquí -->
+        </div>
+        <!-- Anotaciones -->
+        <div class="mt-3">
+            <label for="analyst_notes">Anotaciones del Analista:</label>
+            <textarea class="form-control" id="analyst_notes" rows="3" placeholder="Ingrese sus observaciones aquí..."></textarea>
+        </div>
     </div>
-</div>
 
-<!-- Botones de Exportación -->
-<div class="export-buttons">
-    <button type="button" class="btn btn-primary me-2" id="exportPDFButton" onclick="exportPDF()" aria-label="Exportar a PDF" disabled>Exportar a PDF</button>
-    <button type="button" class="btn btn-success" id="exportExcelButton" onclick="exportExcel()" aria-label="Exportar a Excel" disabled>Exportar a Excel</button>
-</div>
+    <!-- Botones de Exportación -->
+    <div class="export-buttons">
+        <button type="button" class="btn btn-primary me-2" id="exportPDFButton" onclick="exportPDF()" aria-label="Exportar a PDF" disabled>Exportar a PDF</button>
+        <button type="button" class="btn btn-success" id="exportExcelButton" onclick="exportExcel()" aria-label="Exportar a Excel" disabled>Exportar a Excel</button>
+    </div>
 
-<!-- Formulario de Comentarios -->
-<div class="surprise-design mt-4">
-    <h3 class="section-title">Comentarios y Observaciones</h3>
-    <form id="feedbackForm">
-        <div class="mb-3">
-            <label for="user_email" class="form-label">Tu Correo Electrónico (opcional):</label>
-            <input type="email" class="form-control" id="user_email" placeholder="correo@ejemplo.com">
-        </div>
-        <div class="mb-3">
-            <label for="user_feedback" class="form-label">Tus Comentarios:</label>
-            <textarea class="form-control" id="user_feedback" rows="3" placeholder="Escribe tus comentarios aquí..."></textarea>
-        </div>
-        <button type="button" class="btn btn-info" onclick="submitFeedback()">Enviar Comentarios</button>
-    </form>
-</div>
+    <!-- Formulario de Comentarios -->
+    <div class="surprise-design mt-4">
+        <h3 class="section-title">Comentarios y Observaciones</h3>
+        <form id="feedbackForm">
+            <div class="mb-3">
+                <label for="user_email" class="form-label">Tu Correo Electrónico (opcional):</label>
+                <input type="email" class="form-control" id="user_email" placeholder="correo@ejemplo.com">
+            </div>
+            <div class="mb-3">
+                <label for="user_feedback" class="form-label">Tus Comentarios:</label>
+                <textarea class="form-control" id="user_feedback" rows="3" placeholder="Escribe tus comentarios aquí..."></textarea>
+            </div>
+            <button type="button" class="btn btn-info" onclick="submitFeedback()">Enviar Comentarios</button>
+        </form>
+    </div>
 
-<!-- Guía de Usuario -->
-<div class="surprise-design mt-4">
-    <h3 class="section-title">Guía de Usuario</h3>
-    <p>Esta herramienta permite calcular y visualizar las curvas IPR (Índice de Productividad Relativo) y VFP (Presión en el Fondo del Pozo) para evaluar el desempeño de un pozo de petróleo. A continuación, se explica cada parámetro de entrada y su impacto en los resultados:</p>
-    <ul>
-        <li><strong>Permeabilidad (k, md):</strong> Medida de la capacidad del yacimiento para permitir el flujo de fluidos. Valores más altos indican una mayor facilidad para la producción.</li>
-        <li><strong>Espesor neto (h, ft):</strong> Espesor de la formación productora. Un mayor espesor generalmente mejora la productividad del pozo.</li>
-        <li><strong>Presión promedio del yacimiento (P_avg, psi):</strong> Presión en el yacimiento. Influye directamente en la tasa de producción.</li>
-        <li><strong>Radio de drenaje (re, ft):</strong> Radio efectivo desde el pozo donde el yacimiento contribuye al flujo. Un mayor radio de drenaje puede aumentar la producción.</li>
-        <li><strong>Viscosidad (μ, cp):</strong> Resistencia al flujo del fluido. Fluidos con mayor viscosidad son más difíciles de extraer.</li>
-        <li><strong>Relación Gas-Petróleo (GOR, SCF/bbl):</strong> Cantidad de gas disuelto en el petróleo. Afecta la presión de burbuja y la composición del flujo.</li>
-        <li><strong>Gravedad API del crudo:</strong> Medida de la densidad relativa del petróleo. Influye en la viscosidad y otras propiedades del fluido.</li>
-        <li><strong>Temperatura del yacimiento (T, °F):</strong> Temperatura en el yacimiento. Afecta la viscosidad del fluido y las propiedades termodinámicas.</li>
-        <li><strong>Diámetros de Tuberías (D1, D2, D3, in):</strong> Diámetros internos de las tuberías de producción en pulgadas. Influye en la velocidad del fluido y las pérdidas por fricción.</li>
-        <li><strong>Longitud de la tubería (L, ft):</strong> Longitud total de la tubería desde el pozo hasta la superficie. A mayor longitud, mayores pérdidas por fricción.</li>
-        <li><strong>Radio del pozo (rw, in):</strong> Radio efectivo del pozo en pulgadas. Debe ser menor que el radio de drenaje.</li>
-        <li><strong>Densidad del fluido (ρ, lbm/ft³):</strong> Densidad del fluido de producción. Afecta el Número de Reynolds y las pérdidas por fricción.</li>
-        <li><strong>Presión en la boca del pozo (p_wh, psi):</strong> Presión en la entrada de la tubería en la superficie. Influye en el caudal máximo del pozo.</li>
-        <li><strong>Gravedad específica del gas (γ_g):</strong> Relación de la densidad del gas respecto al aire. Afecta las propiedades del flujo de gas.</li>
-    </ul>
-</div>
+    <!-- Guía de Usuario -->
+    <div class="surprise-design mt-4">
+        <h3 class="section-title">Guía de Usuario</h3>
+        <p>Esta herramienta permite calcular y visualizar las curvas IPR (Índice de Productividad Relativo) y VFP (Presión en el Fondo del Pozo) para evaluar el desempeño de un pozo de petróleo. A continuación, se explica cada parámetro de entrada y su impacto en los resultados:</p>
+        <ul>
+            <li><strong>Permeabilidad (k, md):</strong> Medida de la capacidad del yacimiento para permitir el flujo de fluidos. Valores más altos indican una mayor facilidad para la producción.</li>
+            <li><strong>Espesor neto (h, ft):</strong> Espesor de la formación productora. Un mayor espesor generalmente mejora la productividad del pozo.</li>
+            <li><strong>Presión promedio del yacimiento (P_avg, psi):</strong> Presión en el yacimiento. Influye directamente en la tasa de producción.</li>
+            <li><strong>Radio de drenaje (re, ft):</strong> Radio efectivo desde el pozo donde el yacimiento contribuye al flujo. Un mayor radio de drenaje puede aumentar la producción.</li>
+            <li><strong>Viscosidad (μ, cp):</strong> Resistencia al flujo del fluido. Fluidos con mayor viscosidad son más difíciles de extraer.</li>
+            <li><strong>Relación Gas-Petróleo (GOR, SCF/bbl):</strong> Cantidad de gas disuelto en el petróleo. Afecta la presión de burbuja y la composición del flujo.</li>
+            <li><strong>Gravedad API del crudo:</strong> Medida de la densidad relativa del petróleo. Influye en la viscosidad y otras propiedades del fluido.</li>
+            <li><strong>Temperatura del yacimiento (T, °F):</strong> Temperatura en el yacimiento. Afecta la viscosidad del fluido y las propiedades termodinámicas.</li>
+            <li><strong>Diámetros de Tuberías (D1, D2, D3, in):</strong> Diámetros internos de las tuberías de producción en pulgadas. Influye en la velocidad del fluido y las pérdidas por fricción.</li>
+            <li><strong>Longitud de la tubería (L, ft):</strong> Longitud total de la tubería desde el pozo hasta la superficie. A mayor longitud, mayores pérdidas por fricción.</li>
+            <li><strong>Radio del pozo (rw, in):</strong> Radio efectivo del pozo en pulgadas. Debe ser menor que el radio de drenaje.</li>
+            <li><strong>Densidad del fluido (ρ, lbm/ft³):</strong> Densidad del fluido de producción. Afecta el Número de Reynolds y las pérdidas por fricción.</li>
+            <li><strong>Presión en la boca del pozo (p_wh, psi):</strong> Presión en la entrada de la tubería en la superficie. Influye en el caudal máximo del pozo.</li>
+            <li><strong>Gravedad específica del gas (γ_g):</strong> Relación de la densidad del gas respecto al aire. Afecta las propiedades del flujo de gas.</li>
+        </ul>
+    </div>
 
-<!-- Pie de Página -->
-<div class="footer">
-    <p>Desarrollado por Ing. Benito Cabrera R. Derechos reservados 2024.</p>
-</div>
-
+    <!-- Pie de Página -->
+    <div class="footer">
+        <p>Desarrollado por Ing. Benito Cabrera R. Derechos reservados 2024.</p>
+    </div>
 </div>
 
 <!-- Bootstrap JS y dependencias -->
@@ -670,6 +507,8 @@
     function formatNumber(num) {
         return isNaN(num) ? '-' : num.toFixed(2);
     }
+
+    // Funciones de Validación y Cálculo
 
     // Función para mostrar mensajes de error
     function showError(fieldId, message) {
@@ -726,8 +565,6 @@
         if (rw_ft >= inputs['re']) {
             showError('rw', `Radio del pozo (rw) debe ser menor que el radio de drenaje (re).`);
             isValid = false;
-        } else {
-            clearError('rw');
         }
 
         // Validar rangos de API y T
@@ -792,68 +629,41 @@
         }
     }
 
-    // Función para ajustar un polinomio de grado 2
-    function polynomialFit(x, y) {
-        let n = x.length;
-        let X = [];
-        let Y = math.matrix(y);
+    // Función para encontrar la intersección entre dos curvas
+    function findIntersection(q1, p1, q2, p2) {
+        for (let i = 0; i < q1.length - 1; i++) {
+            let q_ipr1 = q1[i], q_ipr2 = q1[i+1];
+            let p_ipr1 = p1[i], p_ipr2 = p1[i+1];
 
-        for (let i = 0; i < n; i++) {
-            X.push([x[i]*x[i], x[i], 1]);
+            for (let j = 0; j < q2.length -1; j++) {
+                let q_vfp1 = q2[j], q_vfp2 = q2[j+1];
+                let p_vfp1 = p2[j], p_vfp2 = p2[j+1];
+
+                // Verificar si hay cruce entre los segmentos
+                let q_min = Math.max(q_ipr1, q_vfp1);
+                let q_max = Math.min(q_ipr2, q_vfp2);
+                if (q_min > q_max) continue;
+
+                let p_ipr_min = p_ipr1 + (p_ipr2 - p_ipr1)*(q_min - q_ipr1)/(q_ipr2 - q_ipr1);
+                let p_ipr_max = p_ipr1 + (p_ipr2 - p_ipr1)*(q_max - q_ipr1)/(q_ipr2 - q_ipr1);
+                let p_vfp_min = p_vfp1 + (p_vfp2 - p_vfp1)*(q_min - q_vfp1)/(q_vfp2 - q_vfp1);
+                let p_vfp_max = p_vfp1 + (p_vfp2 - p_vfp1)*(q_max - q_vfp1)/(q_vfp2 - q_vfp1);
+
+                let dp1 = p_ipr_min - p_vfp_min;
+                let dp2 = p_ipr_max - p_vfp_max;
+                if (dp1 * dp2 <= 0) {
+                    // Hay intersección
+                    let a_ipr = (p_ipr2 - p_ipr1)/(q_ipr2 - q_ipr1);
+                    let b_ipr = p_ipr1 - a_ipr * q_ipr1;
+                    let a_vfp = (p_vfp2 - p_vfp1)/(q_vfp2 - q_vfp1);
+                    let b_vfp = p_vfp1 - a_vfp * q_vfp1;
+                    let q_int = (b_vfp - b_ipr) / (a_ipr - a_vfp);
+                    let p_int = a_ipr * q_int + b_ipr;
+                    return {q: q_int, p: p_int};
+                }
+            }
         }
-
-        let X_matrix = math.matrix(X);
-        let XT = math.transpose(X_matrix);
-        let XTX = math.multiply(XT, X_matrix);
-        let XTY = math.multiply(XT, Y);
-
-        let coefficients;
-        try {
-            coefficients = math.lusolve(XTX, XTY);
-        } catch (error) {
-            console.error("Error al resolver el sistema lineal:", error);
-            return [0, 0, 0];
-        }
-
-        // Convertir a array simple
-        return coefficients.map(c => c[0]);
-    }
-
-    // Función para encontrar las intersecciones entre dos curvas ajustadas
-    function findPolynomialIntersection(coeffs1, coeffs2) {
-        // Coeficientes de la ecuación cuadrática resultante
-        let A = coeffs1.a - coeffs2.a; // a_ipr - a_vfp
-        let B = coeffs1.b - coeffs2.b; // b_ipr - b_vfp
-        let C = coeffs1.c - coeffs2.c; // c_ipr - c_vfp
-
-        console.log(`Resolviendo intersección: A=${A}, B=${B}, C=${C}`);
-
-        // Discriminante
-        let discriminant = B * B - 4 * A * C;
-        console.log(`Discriminante: ${discriminant}`);
-
-        let intersectionPoints = [];
-
-        if (discriminant >= 0 && A !== 0) { // A !== 0 para evitar división por cero
-            let sqrtDiscriminant = Math.sqrt(discriminant);
-            let q1 = (-B + sqrtDiscriminant) / (2 * A);
-            let q2 = (-B - sqrtDiscriminant) / (2 * A);
-
-            console.log(`Soluciones: q1=${q1}, q2=${q2}`);
-
-            // Filtrar soluciones válidas (caudales positivos)
-            let qSolutions = [q1, q2].filter(q => q >= 0);
-
-            qSolutions.forEach(q => {
-                let p = coeffs1.a * q * q + coeffs1.b * q + coeffs1.c;
-                intersectionPoints.push({ q, p });
-                console.log(`Intersección encontrada: q=${q}, p=${p}`);
-            });
-        } else {
-            console.log("No hay intersecciones válidas.");
-        }
-
-        return intersectionPoints;
+        return null;
     }
 
     // Función para interpolar la curva IPR en una presión dada
@@ -864,11 +674,9 @@
 
             if ((p1 - target_pwf) * (p2 - target_pwf) <= 0) {
                 let q = q1 + (q2 - q1) * (target_pwf - p1) / (p2 - p1);
-                console.log(`Interpolación en p_wh=${target_pwf}: q=${q}`);
                 return q;
             }
         }
-        console.log(`No se encontró interpolación para p_wh=${target_pwf}.`);
         return 0; // Si no se encuentra, asumimos caudal cero
     }
 
@@ -876,7 +684,6 @@
     function getData() {
         // Validar entradas
         if (!validateInputs()) {
-            console.log("Validación de entradas fallida.");
             return null;
         }
 
@@ -922,7 +729,6 @@
         bubblePressures['Petrosky-Farshad'] = 112.727 * Math.pow((GOR / gamma_g), 0.577) * Math.pow(10, 0.0246 * API) * Math.pow(T, -0.486);
 
         let presion_burbuja = bubblePressures[bubble_correlation];
-        console.log(`Presión de Burbuja (${bubble_correlation}): ${presion_burbuja} psi`);
 
         // Determinar la viscosidad utilizando la correlación seleccionada
         let viscosity;
@@ -946,50 +752,38 @@
         }
 
         let mu = viscosity;
-        console.log(`Viscosidad Calculada: ${mu} cp`);
 
         // Calcular el Índice de Productividad (PI) usando la ecuación simplificada
         let PI_simplificado = (7.08e-3 * k * h) / (mu * Math.log(re / rw));
-        console.log(`Índice de Productividad Simplificado (PI_simplificado): ${PI_simplificado} bbl/(día·psi)`);
 
         // Calcular el caudal en el punto de burbuja (p_wf = p_b)
         let caudal_burbuja = PI_simplificado * (p_avg - presion_burbuja);
-        console.log(`Caudal de Burbuja (q_b): ${caudal_burbuja} bbl/día`);
 
         // Calcular el caudal máximo (p_wf = 0)
         let q_max = caudal_burbuja + (PI_simplificado * presion_burbuja) / 1.8;
-        console.log(`Caudal Máximo del Pozo (q_max): ${q_max} bbl/día`);
 
         // Calcular la velocidad del fluido (u) para cada diámetro de tubería
         let areas = diametros_ft.map(d => Math.PI * Math.pow(d / 2, 2)); // ft²
         let u_values = areas.map(area => (caudal_burbuja * 5.615) / (24 * 3600 * area)); // ft/s
-        console.log(`Velocidades (u) para cada tubería: ${u_values}`);
 
         // Calcular el Número de Reynolds (Re) para cada diámetro
         let Re_values = u_values.map((u, idx) => calcularReynolds(rho, u, diametros_ft[idx], mu));
-        console.log(`Número de Reynolds (Re) para cada tubería: ${Re_values}`);
 
         // Calcular el Factor de no-Darcy (f_D) usando la constante C proporcionada por el usuario
         let f_D_values = Re_values.map(Re => calcularFactorNoDarcy(Re, C_no_darcy));
-        console.log(`Factor de no-Darcy (f_D) para cada tubería: ${f_D_values}`);
 
         // Ajustar el Índice de Productividad (PI) con f_D y Re (usamos promedios para simplificar)
         let f_D_avg = f_D_values.reduce((a, b) => a + b, 0) / f_D_values.length;
         let Re_avg = Re_values.reduce((a, b) => a + b, 0) / Re_values.length;
         let PI_complejo = PI_simplificado * (1 + (f_D_avg / Math.sqrt(Re_avg)));
-        console.log(`Índice de Productividad Complejo (PI_complejo): ${PI_complejo} bbl/(día·psi)`);
 
         // Calcular el caudal de burbuja y caudal máximo con PI complejo
         let caudal_burbuja_complejo = PI_complejo * (p_avg - presion_burbuja);
         let q_max_complejo = caudal_burbuja_complejo + (PI_complejo * presion_burbuja) / 1.8;
-        console.log(`Caudal de Burbuja Complejo (q_b_complejo): ${caudal_burbuja_complejo} bbl/día`);
-        console.log(`Caudal Máximo Complejo (q_max_complejo): ${q_max_complejo} bbl/día`);
 
         // Generar datos de la curva IPR usando el método de Vogel con PI complejo
-        let p_wf_ipr = Array.from({length: 50}, (_, i) => p_avg * (1 - 0.2 * (i / 49) - 0.8 * Math.pow(i / 49, 2))); // psi
-        let q_ipr = Array.from({length: 50}, (_, i) => q_max_complejo * (1 - 0.2 * (i / 49) - 0.8 * Math.pow(i / 49, 2))); // bbl/día
-        console.log(`Datos de la Curva IPR (q_ipr): ${q_ipr}`);
-        console.log(`Datos de la Curva IPR (p_wf_ipr): ${p_wf_ipr}`);
+        let p_wf_ipr = Array.from({length: 50}, (_, i) => p_avg * i / 49); // psi
+        let q_ipr = p_wf_ipr.map(pwf => q_max_complejo * (1 - 0.2 * (pwf / p_avg) - 0.8 * Math.pow(pwf / p_avg, 2))); // bbl/día
 
         // Generar datos de la curva VFP para cada diámetro
         let g = 32.17; // ft/s²
@@ -1008,9 +802,6 @@
                 let term_friction = lbm_ft_s2_to_psi((2 * f_F * rho * Math.pow(u_val, 2) * L) / diametro);
                 return p_wh + term_elevation + term_kinetic + term_friction;
             });
-
-            console.log(`Datos de la Curva VFP - D${idx+1} (q_values): ${q_values}`);
-            console.log(`Datos de la Curva VFP - D${idx+1} (p_wf_vfp): ${p_wf_vfp}`);
 
             return {
                 q_values,
@@ -1041,7 +832,6 @@
         // Calcular q_o para cada prueba
         test1.qo = calcularQo(test1.qt, test1.bsw);
         test2.qo = calcularQo(test2.qt, test2.bsw);
-        console.log(`Caudales de las Pruebas (q_o): Test1=${test1.qo}, Test2=${test2.qo}`);
 
         // Calcular presión corregida para cada prueba
         let rho_lb_per_gal = rho * 0.13368; // lb/gal
@@ -1052,72 +842,45 @@
         let delta_depth2 = MD - test2.depth; // ft
         let delta_p2 = 0.052 * rho_lb_per_gal * delta_depth2; // psi
         test2.pwf_corrected = test2.pwf + delta_p2;
-        console.log(`Presiones Corregidas de las Pruebas (p_wf_corrected): Test1=${test1.pwf_corrected}, Test2=${test2.pwf_corrected}`);
 
-        // Ajuste de la curva IPR
-        let iprCoefficients = polynomialFit(q_ipr, p_wf_ipr); // Grado 2
-        let [a_ipr, b_ipr, c_ipr] = iprCoefficients; // Coeficientes a, b, c
-        console.log(`Coeficientes de Ajuste IPR: a=${a_ipr}, b=${b_ipr}, c=${c_ipr}`);
+        // Encontrar intersecciones entre IPR y VFP
+        let intersections = [];
 
-        // Ajuste de las curvas VFP para cada diámetro
-        let vfpCoefficientsArray = vfp_curves.map(curve => {
-            let vfpCoefficients = polynomialFit(curve.q_values, curve.p_wf_vfp);
-            let [a_vfp, b_vfp, c_vfp] = vfpCoefficients; // Coeficientes a, b, c
-            console.log(`Coeficientes de Ajuste VFP - D${curve.diametro_in}: a=${a_vfp}, b=${b_vfp}, c=${c_vfp}`);
-            return {
-                coefficients: { a: a_vfp, b: b_vfp, c: c_vfp },
-                diametro_in: curve.diametro_in
-            };
+        vfp_curves.forEach(curve => {
+            let intersection = findIntersection(q_ipr, p_wf_ipr, curve.q_values, curve.p_wf_vfp);
+            if (intersection) {
+                intersections.push({
+                    diameter_in: curve.diametro_in,
+                    q: intersection.q,
+                    p: intersection.p
+                });
+            } else {
+                intersections.push({
+                    diameter_in: curve.diametro_in,
+                    q: null,
+                    p: null
+                });
+            }
         });
 
-        // Encontrar intersecciones polinomiales
-        let polynomialIntersections = vfpCoefficientsArray.map(vfpCurve => {
-            let intersectionPoints = findPolynomialIntersection({ a: a_ipr, b: b_ipr, c: c_ipr }, vfpCurve.coefficients);
-            return {
-                diameter_in: vfpCurve.diametro_in,
-                points: intersectionPoints
-            };
-        });
-
-        // Filtrar intersecciones dentro del rango de caudal de la curva IPR
-        let min_q = Math.min(...q_ipr);
-        let max_q = Math.max(...q_ipr);
-        console.log(`Rango de Caudales IPR: min=${min_q}, max=${max_q}`);
-
-        let intersections = polynomialIntersections.map(intersection => {
-            let validPoints = intersection.points.filter(point => 
-                point.q >= min_q && point.q <= max_q
-            );
-            console.log(`Intersecciones válidas para D${intersection.diametro_in}:`, validPoints);
-            // Tomar el primer punto válido (puede ajustarse si hay múltiples intersecciones)
-            let point = validPoints[0] || { q: null, p: null };
-            return {
-                diameter_in: intersection.diametro_in,
-                q: point.q,
-                p: point.p
-            };
-        });
-
+        // Determinar si el pozo fluye naturalmente
         // Calcular el caudal en la IPR a la presión de cabeza (p_wh)
         let q_at_pwh = interpolateIPR(p_wf_ipr, q_ipr, p_wh);
-        console.log(`Caudal en IPR a p_wh (${p_wh} psi): ${q_at_pwh} bbl/día`);
 
         let wellFlowsNaturally = q_at_pwh > 0;
-        console.log(`¿El pozo fluye naturalmente? ${wellFlowsNaturally}`);
 
         // Si no fluye naturalmente, calcular delta de presión adicional
         let deltaP_required = p_wh - p_avg;
         if (deltaP_required < 0) deltaP_required = 0;
-        console.log(`Delta de Presión Requerida: ${deltaP_required} psi`);
 
-        return {
-            p_wf_ipr,
-            q_ipr,
-            vfp_curves,
-            presion_burbuja,
-            caudal_burbuja_complejo,
-            PI_complejo,
-            q_max_complejo,
+        return { 
+            p_wf_ipr, 
+            q_ipr, 
+            vfp_curves, 
+            presion_burbuja, 
+            caudal_burbuja_complejo, 
+            PI_complejo, 
+            q_max_complejo, 
             mu,
             Re_avg,
             f_D_avg,
@@ -1136,54 +899,16 @@
             intersections,
             wellFlowsNaturally,
             deltaP_required,
-            q_at_pwh,
-            iprCoefficients: { a: a_ipr, b: b_ipr, c: c_ipr },
-            vfpCoefficientsArray
+            q_at_pwh
         };
     }
 
     // Función para graficar los datos utilizando Plotly
     function plotGraph() {
         let data = getData();
-        if (!data) {
-            console.log("No se pudo obtener los datos.");
-            return;
-        }
+        if (!data) return;
 
-        let {
-            p_wf_ipr,
-            q_ipr,
-            vfp_curves,
-            presion_burbuja,
-            caudal_burbuja_complejo,
-            PI_complejo,
-            q_max_complejo,
-            mu,
-            Re_avg,
-            f_D_avg,
-            PI_simplificado,
-            p_avg,
-            bubblePressures,
-            bubble_correlation,
-            test1,
-            test2,
-            company_name,
-            well_name,
-            reservoir_name,
-            analyst_name,
-            analysis_date,
-            p_wh,
-            intersections,
-            wellFlowsNaturally,
-            deltaP_required,
-            q_at_pwh,
-            iprCoefficients,
-            vfpCoefficientsArray
-        } = data;
-
-        // Encontrar el máximo valor de presión para ajustar el eje y
-        let max_p = p_avg + 100;
-        console.log(`Máximo valor de presión para el eje y: ${max_p} psi`);
+        let { p_wf_ipr, q_ipr, vfp_curves, presion_burbuja, caudal_burbuja_complejo, PI_complejo, q_max_complejo, mu, Re_avg, f_D_avg, PI_simplificado, p_avg, bubblePressures, bubble_correlation, test1, test2, company_name, well_name, reservoir_name, analyst_name, analysis_date, p_wh, intersections, wellFlowsNaturally, deltaP_required, q_at_pwh } = data;
 
         // Curva IPR
         let trace_ipr = {
@@ -1200,8 +925,8 @@
                 x: curve.q_values,
                 y: curve.p_wf_vfp,
                 mode: 'lines',
-                name: `Curva VFP - D${idx+1}=${curve.diametro_in} in`,
-                line: {color: ['purple', 'green', 'red'][idx % 3]}
+                name: `Curva VFP - D=${curve.diametro_in} in`,
+                line: {color: ['purple', 'green', 'red'][idx]}
             };
         });
 
@@ -1252,20 +977,11 @@
             line: {color: 'blue', dash: 'dot'}
         };
 
-        // Agregar puntos de intersección al gráfico (aunque las secciones están ocultas)
-        let intersectionTraces = intersections.map((intersection, idx) => {
-            if (intersection.q !== null && intersection.p !== null) {
-                return {
-                    x: [intersection.q],
-                    y: [intersection.p],
-                    mode: 'markers',
-                    name: `Intersección D${idx + 1}`,
-                    marker: { color: 'red', size: 10, symbol: 'circle' }
-                };
-            } else {
-                return null;
-            }
-        }).filter(trace => trace !== null);
+        // Establecer los rangos de los ejes programáticamente
+        let xAxisMin = 0; 
+        let xAxisMax = q_max_complejo + 100;
+        let yAxisMin = 0;
+        let yAxisMax = p_avg + 100;
 
         // Configuración del gráfico con los rangos establecidos
         let layout = {
@@ -1273,14 +989,14 @@
             xaxis: {
                 title: 'Caudal de Flujo (bbl/día)',
                 titlefont: {size: 12},
-                range: [0, q_max_complejo + 100],
+                range: [xAxisMin, xAxisMax],
                 zeroline: false,
                 color: 'black'
             },
             yaxis: {
                 title: 'Presión en el Fondo del Pozo (psi)',
                 titlefont: {size: 12},
-                range: [0, p_avg + 100], // Ajustar el rango dinámicamente a p_avg + 100
+                range: [yAxisMin, yAxisMax],
                 zeroline: false,
                 color: 'black'
             },
@@ -1290,8 +1006,7 @@
         };
 
         // Actualizar o crear el gráfico
-        Plotly.newPlot('plot', [trace_ipr, ...vfp_traces, trace_pwh_line, ...bubble_traces, ...test_traces, ...intersectionTraces], layout, {responsive: true});
-        console.log("Gráfico actualizado.");
+        Plotly.newPlot('plot', [trace_ipr, ...vfp_traces, trace_pwh_line, ...bubble_traces, ...test_traces], layout, {responsive: true});
 
         // Mostrar los resultados en la tabla
         document.getElementById("presion_burbuja").innerText = formatNumber(presion_burbuja);
@@ -1303,26 +1018,18 @@
         document.getElementById("reynolds").innerText = formatNumber(Re_avg);
         document.getElementById("f_darcy").innerText = formatNumber(f_D_avg);
 
-        // Mostrar coeficientes en la sección de resultados adicionales (oculto)
-        // document.getElementById("coefficients_ipr").innerText = `a=${formatNumber(iprCoefficients.a)}, b=${formatNumber(iprCoefficients.b)}, c=${formatNumber(iprCoefficients.c)}`;
-
-        vfpCoefficientsArray.forEach((vfpCoeff, idx) => {
-            let coeffsText = `a=${formatNumber(vfpCoeff.coefficients.a)}, b=${formatNumber(vfpCoeff.coefficients.b)}, c=${formatNumber(vfpCoeff.coefficients.c)}`;
-            document.getElementById(`coefficients_vfp${idx+1}`).innerText = coeffsText;
-        });
-
-        // Actualizar la tabla de intersecciones (oculta)
+        // Actualizar la tabla de intersecciones
         let intersectionsTableBody = document.getElementById("intersections_table_body");
         intersectionsTableBody.innerHTML = ""; // Limpiar contenido previo
 
         intersections.forEach(intersection => {
             let row = document.createElement("tr");
-
+            
             // Diámetro
             let cellDiameter = document.createElement("td");
-            cellDiameter.innerText = formatNumber(intersection.diametro_in);
+            cellDiameter.innerText = formatNumber(intersection.diameter_in);
             row.appendChild(cellDiameter);
-
+            
             // Caudal de intersección
             let cellFlowRate = document.createElement("td");
             if (intersection.q !== null) {
@@ -1331,7 +1038,7 @@
                 cellFlowRate.innerText = "-";
             }
             row.appendChild(cellFlowRate);
-
+            
             // Presión de intersección
             let cellPressure = document.createElement("td");
             if (intersection.p !== null) {
@@ -1340,67 +1047,20 @@
                 cellPressure.innerText = "-";
             }
             row.appendChild(cellPressure);
-
+            
             intersectionsTableBody.appendChild(row);
         });
 
-        // Mostrar Parámetros de operación del pozo
+        // Mostrar si el pozo fluye naturalmente o no
         let naturalFlowResultDiv = document.getElementById("natural_flow_result");
-        if (naturalFlowResultDiv) {
-            naturalFlowResultDiv.innerHTML = ""; // Limpiar contenido previo
+        naturalFlowResultDiv.innerHTML = ""; // Limpiar contenido previo
 
-            if (wellFlowsNaturally) {
-                naturalFlowResultDiv.innerHTML = `<p><strong>El pozo fluye a flujo natural.</strong> El caudal a la presión de cabeza (${formatNumber(p_wh)} psi) es de ${formatNumber(q_at_pwh)} bbl/día.</p>`;
-            } else {
-                naturalFlowResultDiv.innerHTML = `<p><strong>El pozo no fluye a flujo natural.</strong></p>`;
-                naturalFlowResultDiv.innerHTML += `<p>Se debe diseñar un sistema de levantamiento artificial que genere un delta de presión adicional de ${formatNumber(deltaP_required)} psi para alcanzar la presión de cabeza.</p>`;
-            }
+        if (wellFlowsNaturally) {
+            naturalFlowResultDiv.innerHTML = `<p><strong>El pozo fluye a flujo natural.</strong> El caudal a la presión de cabeza (${formatNumber(p_wh)} psi) es de ${formatNumber(q_at_pwh)} bbl/día.</p>`;
+        } else {
+            naturalFlowResultDiv.innerHTML = `<p><strong>El pozo no fluye a flujo natural.</strong></p>`;
+            naturalFlowResultDiv.innerHTML += `<p>Se debe diseñar un sistema de levantamiento artificial que genere un delta de presión adicional de ${formatNumber(-deltaP_required)} psi para alcanzar la presión de cabeza.</p>`;
         }
-
-        // Llenar las tablas de IPR y VFP
-        populateDataTables(data);
-    }
-
-    // Función para llenar las tablas IPR y VFP
-    function populateDataTables(data) {
-        const { p_wf_ipr, q_ipr, vfp_curves } = data;
-
-        // Población de la tabla IPR
-        let iprTableBody = document.getElementById("ipr_data_table");
-        iprTableBody.innerHTML = ""; // Limpiar contenido previo
-
-        // Limitar la cantidad de filas para mantener la tabla compacta (ejemplo: 10 filas)
-        let step_ipr = Math.ceil(p_wf_ipr.length / 10);
-        for (let i = 0; i < p_wf_ipr.length; i += step_ipr) {
-            let row = document.createElement("tr");
-            let cellQ = document.createElement("td");
-            let cellP = document.createElement("td");
-            cellQ.innerText = formatNumber(q_ipr[i]);
-            cellP.innerText = formatNumber(p_wf_ipr[i]);
-            row.appendChild(cellQ);
-            row.appendChild(cellP);
-            iprTableBody.appendChild(row);
-        }
-
-        // Población de las tablas VFP individuales
-        vfp_curves.forEach((curve, idx) => {
-            let tableBodyId = `vfp${idx+1}_data_table`;
-            let vfpTableBody = document.getElementById(tableBodyId);
-            vfpTableBody.innerHTML = ""; // Limpiar contenido previo
-
-            // Limitar la cantidad de filas para mantener la tabla compacta (ejemplo: 10 filas)
-            let step_vfp = Math.ceil(curve.q_values.length / 10);
-            for (let i = 0; i < curve.q_values.length; i += step_vfp) {
-                let row = document.createElement("tr");
-                let cellQ = document.createElement("td");
-                let cellP = document.createElement("td");
-                cellQ.innerText = formatNumber(curve.q_values[i]);
-                cellP.innerText = formatNumber(curve.p_wf_vfp[i]);
-                row.appendChild(cellQ);
-                row.appendChild(cellP);
-                vfpTableBody.appendChild(row);
-            }
-        });
     }
 
     // Funciones de exportación
@@ -1427,53 +1087,31 @@
                 heightLeft -= pageHeight;
             }
 
-            // Agregar las anotaciones del usuario (Comentarios y Observaciones)
-            let notes = document.getElementById('user_feedback').value;
+            // Agregar las anotaciones del analista
+            let notes = document.getElementById('analyst_notes').value;
             if (notes.trim() !== '') {
                 doc.addPage();
                 doc.setFontSize(12);
-                doc.text("Comentarios y Observaciones:", 14, 20);
+                doc.text("Anotaciones del Analista:", 14, 20);
                 doc.setFontSize(10);
-                // Dividir el texto en líneas si es necesario
-                let lines = doc.splitTextToSize(notes, 280);
-                doc.text(lines, 14, 30);
+                doc.text(notes, 14, 30);
             }
 
             doc.save('Resultados_IPR_VFP.pdf');
-            console.log("Exportación a PDF realizada exitosamente.");
-        }).catch(error => {
-            console.error("Error al generar el PDF:", error);
         });
     }
 
     function exportExcel() {
-        try {
-            // Crear una nueva hoja de cálculo
-            let wb = XLSX.utils.book_new();
+        // Crear una nueva hoja de cálculo
+        let wb = XLSX.utils.book_new();
 
-            // Obtener la tabla de resultados
-            let table = document.querySelector('.results-table');
-            let ws = XLSX.utils.table_to_sheet(table);
-            XLSX.utils.book_append_sheet(wb, ws, "Resultados");
+        // Obtener la tabla de resultados
+        let table = document.querySelector('.results-table');
+        let ws = XLSX.utils.table_to_sheet(table);
+        XLSX.utils.book_append_sheet(wb, ws, "Resultados");
 
-            // Obtener la tabla IPR
-            let iprTable = document.querySelector('#ipr_data_table').parentElement.parentElement;
-            let ws_ipr = XLSX.utils.table_to_sheet(iprTable);
-            XLSX.utils.book_append_sheet(wb, ws_ipr, "Curva IPR");
-
-            // Obtener las tablas VFP
-            for (let i = 1; i <= 3; i++) {
-                let vfpTable = document.querySelector(`#vfp${i}_data_table`).parentElement.parentElement;
-                let ws_vfp = XLSX.utils.table_to_sheet(vfpTable);
-                XLSX.utils.book_append_sheet(wb, ws_vfp, `Curva VFP ${i}`);
-            }
-
-            // Guardar el libro
-            XLSX.writeFile(wb, 'Resultados_IPR_VFP.xlsx');
-            console.log("Exportación a Excel realizada exitosamente.");
-        } catch (error) {
-            console.error("Error al exportar a Excel:", error);
-        }
+        // Guardar el libro
+        XLSX.writeFile(wb, 'Resultados_IPR_VFP.xlsx');
     }
 
     // Función para enviar comentarios (simulada)
